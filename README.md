@@ -41,3 +41,18 @@ Get place: `curl http://104.248.111.9/api/v1/place/1`
 Added Client: `curl -X POST -H "Content-Type: application/json" -d '{"name": "Client Test", "latitude": 10.22, "longitude": -12.223}'  http://104.248.111.9/api/v1/client`
 List Clients: `curl http://104.248.111.9/api/v1/clients`
 
+To see the RabbitMQ run the command:    
+`kubectl port-forward rabbitmq-0 15673:15672`
+
+Access locally: http:localhost:15673    
+User: **root**  
+Pass: **root**  
+
+
+To access mysql locally: 
+`kubectl port-forward svc/mysql 3307:3306`
+
+Access locally: `mysql -h 127.0.0.1 -u root --port=3307 -p`
+Pass: **root**
+
+:tada: Enjoy!
