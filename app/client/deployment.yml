@@ -1,0 +1,75 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: client
+  labels:
+    app: client
+    vesion: "1.0"
+    vizualise: "true"
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  minReadySeconds: 0
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: "30%"
+  selector:
+    matchLabels:
+      app: client
+      vesion: "1.0"
+      serving: "true"     
+  template:
+    metadata:      
+      labels:
+        app: client
+        vesion: "1.0"
+        serving: "true" 
+        visualize: "true"         
+    spec:       
+      containers:
+      - image: felipegirotti/client-java-example
+        imagePullPolicy: Always
+        name: client
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 300m
+            memory: 300Mi
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:mysql://mysql:3306/client"
+        - name: SPRING_DATASOURCE_USERNAME
+          value: "root"
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: "root"
+        - name: SPRING_RABBITMQ_HOST
+          value: "rabbitmq"
+        - name: SPRING_RABBITMQ_PORT
+          value: "5672"
+        - name: SPRING_RABBITMQ_USERNAME
+          value: "root"
+        - name: SPRING_RABBITMQ_PASSWORD
+          value: "root"
+        - name: SENDER_TOPIC_EXCHANGE_NAME
+          value: "client"
+        - name: SENDER_QUEUE_NAME
+          value: "drz-client"
+        - name: SENDER_TOPIC_NAME
+          value: "clients.client.save"
+        - name: SENDER_TOPIC_DELETE_NAME
+          value: "clients.client.delete"    
+        - name: SERVER_PORT
+          value: "8080"        
+        livenessProbe:
+          initialDelaySeconds: 60
+          httpGet:
+            path: /actuator/health
+            port: 8080
+      terminationGracePeriodSeconds: 120
+      restartPolicy: Always
+
+

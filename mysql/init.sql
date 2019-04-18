@@ -1,0 +1,4 @@
+--- INITIAL DATABASE CREATE -- -
+CREATE DATABASE `place` CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+CREATE DATABASE `client` CHARACTER SET utf8 COLLATE utf8_general_ci;
