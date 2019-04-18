@@ -1,5 +1,5 @@
 # Example of Kubernetes and Istio(Basic)
-For this example we are using the [Digital Ocean](https://www.digitalocean.com/) for managed kubernetes,    
+For this example we are using the [Digital Ocean](https://m.do.co/c/3bb2700f66eb)($100 free) for managed kubernetes,    
 but you are free to use Google, Azure, AWS, or even minikube(local).
 
 
